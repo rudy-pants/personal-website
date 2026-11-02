@@ -95,92 +95,65 @@ h1 {
   font-size: clamp(16px, 1.4vw, 18px);
 }
 
-/* A pixel sailboat crossing a strip of scrolling pixel waves. */
-.sea {
-  position: relative;
-  overflow: hidden;
-  margin-top: 40px;
-  max-width: 560px;
-  height: 96px;
-  background: var(--blue-8);
+.meta { margin-top: 32px; color: var(--blue-4); }
+
+/* A big pixel sailboat rocking on a strip of scrolling pixel waves.
+   Everything is sized in --u, one pixel of the boat's 32x24 grid. */
+.hero-sea {
+  --u: calc(clamp(180px, 28vw, 380px) / 32);
+  position: absolute;
+  right: clamp(-40px, 4vw, 96px);
+  bottom: calc(var(--u) * 2);
+  width: calc(var(--u) * 48);
+  height: calc(var(--u) * 28);
 }
 
-.sailboat {
+.hero-boat {
   position: absolute;
   z-index: 2;
-  bottom: 14px;
-  width: 64px;
-  animation: sail 18s linear infinite;
-}
-
-.sailboat svg {
-  display: block;
-  width: 100%;
-  animation: rock 1.6s steps(2) infinite;
+  left: calc(var(--u) * 8);
+  bottom: calc(var(--u) * 3);
+  width: calc(var(--u) * 32);
+  transform-origin: 50% 85%;
+  animation: rock 7s ease-in-out infinite;
 }
 
 .waves {
   position: absolute;
   left: 0;
   right: 0;
-  height: 12px;
-  background-size: 48px 12px;
+  bottom: 0;
+  height: calc(var(--u) * 5);
   background-repeat: repeat-x;
-  animation: drift 3s linear infinite;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+  animation: drift 6s linear infinite;
 }
 
 .waves-back {
   z-index: 1;
-  bottom: 10px;
-  height: 24px;
+  height: calc(var(--u) * 7);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 4' shape-rendering='crispEdges'%3E%3Cpath fill='%23495eb7' d='M6 0h4v1h3v1h3v2H0V2h3V1h3z'/%3E%3C/svg%3E"), linear-gradient(var(--blue-6), var(--blue-6));
-  background-size: 48px 12px, 100% 12px;
-  background-position: 24px 0, 0 12px;
+  background-size: calc(var(--u) * 12) calc(var(--u) * 3), 100% calc(var(--u) * 4);
+  background-position: calc(var(--u) * 6) 0, 0 calc(var(--u) * 3);
   animation-direction: reverse;
-  animation-duration: 5s;
+  animation-duration: 9s;
 }
 
 .waves-front {
   z-index: 3;
-  bottom: 10px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 4' shape-rendering='crispEdges'%3E%3Cpath fill='%236b7cc4' d='M6 0h4v1h3v1h3v2H0V2h3V1h3z'/%3E%3C/svg%3E");
-}
-
-.sea::after {
-  content: "";
-  position: absolute;
-  z-index: 3;
-  inset: auto 0 0;
-  height: 10px;
-  background: var(--blue-5);
-}
-
-@keyframes sail {
-  from { left: -72px; }
-  to { left: 100%; }
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 4' shape-rendering='crispEdges'%3E%3Cpath fill='%236b7cc4' d='M6 0h4v1h3v1h3v2H0V2h3V1h3z'/%3E%3C/svg%3E"), linear-gradient(var(--blue-5), var(--blue-5));
+  background-size: calc(var(--u) * 12) calc(var(--u) * 3), 100% calc(var(--u) * 2);
+  background-position: 0 0, 0 calc(var(--u) * 3);
 }
 
 @keyframes rock {
-  50% { transform: translateY(-3px) rotate(-3deg); }
+  25% { transform: translateY(-6px) rotate(-2.5deg); }
+  75% { transform: translateY(-2px) rotate(1.5deg); }
 }
 
 @keyframes drift {
-  to { background-position-x: 48px; }
-}
-
-.meta { margin-top: 32px; color: var(--blue-4); }
-
-.hero-boat {
-  position: absolute;
-  right: clamp(-40px, 4vw, 96px);
-  bottom: 40px;
-  width: clamp(180px, 28vw, 380px);
-  opacity: .9;
-  animation: bob 4s ease-in-out infinite;
-}
-
-@keyframes bob {
-  50% { transform: translateY(-8px) rotate(-1deg); }
+  to { background-position-x: calc(var(--u) * 12); }
 }
 
 /* Cards */
@@ -273,6 +246,5 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-boat, .sailboat, .sailboat svg, .waves { animation: none; }
-  .sailboat { left: 30%; }
+  .hero-boat, .waves { animation: none; }
 }
