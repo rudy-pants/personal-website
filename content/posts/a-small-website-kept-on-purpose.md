@@ -8,6 +8,14 @@ Products built around large language models are becoming the new front door to t
 
 I increasingly rely on ChatGPT and Claude/Firecrawl for finding important documents and high-quality developer blogs online, instead of using Google or DuckDuckGo.
 
-Current AI search capabilities are still very much in the early days, considering how current AI search feels like making curl requests against a Google-based index.
+Instead of using Google or DuckDuckGo, I find documents like developer blogs and medical procedure guidelines through ChatGPT and Claude with Firecrawl.
 
-I need a better interface to access human-authored documents.
+Current AI search capabilities are still very much in the early days.
+
+They feel like a more efficient search through Google, due to models being trained with "important" people in their field, or references to their blogs through Reddit or other blogs.
+
+Different search indexes like Firecrawl that require payment to access their files seems like an extremely efficient way to keep this going, where their primary interface is a model's context.
+
+If you provide models a local datastore of Reddit data from specific subreddits, it is able to search through that datastore using custom scripting commands through long Python queries.
+
+Creating a vast network of search capabilities exposed to a model's context window or tool calling harmess could be exactly what we need.
