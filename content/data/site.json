@@ -3,7 +3,7 @@
   "url": "https://rudybanerjee.com",
   "greeting": "Hello, I’m Rudy.",
   "description": "Rudy’s personal website: writing and notes from the web.",
-  "about": "I’m an engineer who likes small websites, long reads, and the hour just after sunset. This is a placeholder for a few lines in your own words.",
+  "about": "I’m an engineer who likes deep technical problems, art, good blog posts, and the sky. This site is under active development.",
   "links": [
     { "label": "RSS", "url": "/feed.xml" }
   ],
