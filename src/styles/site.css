@@ -1,0 +1,113 @@
+/* Page styles. The sky itself lives in /src/sky. */
+
+@font-face { font-family: "Newsreader"; font-style: normal; font-weight: 300 600; font-display: swap; src: url("/fonts/newsreader-r.woff2") format("woff2"); }
+@font-face { font-family: "Newsreader"; font-style: italic; font-weight: 300 600; font-display: swap; src: url("/fonts/newsreader-i.woff2") format("woff2"); }
+
+:root {
+  color-scheme: only light;
+  --ink: #f6ecdf;
+  --ink-dark: #060914;
+  --accent: #f4983e;
+  --line: rgba(246, 236, 223, .17);
+  --night: #010103;
+  --reading: #050c24;
+  --first-screen: 70vh;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { background: var(--night); overflow-y: scroll; }
+html[data-view="post"] { background: var(--reading); }
+body {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; font-weight: 400; }
+
+.skip { position: fixed; left: 12px; top: -60px; z-index: 10; padding: 8px 14px; background: var(--ink); color: var(--ink-dark); border-radius: 4px; }
+.skip:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.title:focus { outline: none; }
+
+/* Sky layers */
+#sky { position: absolute; top: 0; left: 0; width: 100%; z-index: -1; display: block; }
+#sky-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; display: block; z-index: 0; visibility: hidden; }
+#probe { position: fixed; top: 0; left: 0; width: 0; height: 100vh; visibility: hidden; }
+.view { position: relative; z-index: 1; }
+
+/* Header and the fades that keep text from running into it */
+#top { position: fixed; top: 0; left: 0; right: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 28px 64px; font-size: 18px; transition: color .25s; }
+#top nav { display: flex; gap: 26px; }
+#brand { font-weight: 500; }
+html.js[data-view="home"] #brand { opacity: 0; }
+#sky-scrim, #scrim, #pscrim { position: fixed; left: 0; right: 0; top: 0; height: 112px; z-index: 4; opacity: 0; pointer-events: none; transition: opacity .25s; }
+#sky-scrim { background: linear-gradient(to bottom, rgba(2, 40, 120, .88) 50%, transparent); }
+#scrim { background: linear-gradient(to bottom, rgb(3, 3, 7) 55%, transparent); }
+#pscrim { background: linear-gradient(to bottom, var(--reading) 55%, transparent); }
+
+/* Home */
+.first { position: relative; height: var(--first-screen); }
+.hw { position: absolute; left: 0; right: 0; top: 49.5vh; transform: translateY(-50%); text-align: center; padding: 0 24px; }
+.hw h1, .hw h1 span { color: var(--ink-dark) !important; -webkit-text-fill-color: var(--ink-dark); }
+.hw h1 { font-size: 68px; font-weight: 500; font-variation-settings: "opsz" 30; line-height: 1.08; letter-spacing: -.018em; }
+.ground { position: relative; padding: 0 64px 44px; }
+#about, #writing { max-width: 640px; scroll-margin-top: 104px; }
+#writing { margin-top: 44px; }
+.lede { font-size: 23px; line-height: 1.34; }
+.links { display: flex; gap: 18px; margin-top: 12px; font-size: .92em; }
+.links a { border-bottom: 1px solid var(--line); }
+.label { font-size: .84em; font-style: italic; opacity: .72; margin-bottom: 9px; }
+.lst { list-style: none; margin: 0; padding: 0; }
+.lst li { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 10px 0; border-top: 1px solid var(--line); }
+.lst time { font-size: .8em; font-style: italic; opacity: .72; white-space: nowrap; }
+footer { margin-top: 64px; font-size: .84em; font-style: italic; opacity: .72; }
+@media (hover: hover) { .lst a:hover, .back:hover { color: var(--accent); } }
+
+/* Reading */
+.col { width: 650px; max-width: 100%; margin: 0 auto; padding: 19vh 24px 12vh; }
+.col > time { font-style: italic; font-size: .88em; opacity: .76; display: block; margin-bottom: 8px; }
+.title { font-size: 50px; line-height: 1.1; letter-spacing: -.016em; text-wrap: balance; }
+.col p { font-size: 20.5px; line-height: 1.62; margin-bottom: 1.05em; }
+.col p.stand { font-size: 22px; line-height: 1.38; font-style: italic; opacity: .82; margin: 18px 0 34px; }
+.col h2 { font-size: 27px; line-height: 1.2; margin: 1.5em 0 .55em; }
+.col h3 { font-size: 22px; line-height: 1.25; margin: 1.4em 0 .5em; }
+.col a:not(.back) { border-bottom: 1px solid var(--line); }
+.col img { max-width: 100%; height: auto; border-radius: 4px; }
+blockquote { margin: 1.5em 0; padding-left: 22px; border-left: 2px solid var(--accent); font-size: 24px; line-height: 1.36; font-style: italic; }
+blockquote p, .col blockquote p { font-size: inherit; line-height: inherit; margin: 0; }
+pre { font: 15px/1.6 ui-monospace, Menlo, monospace; background: rgba(255, 255, 255, .055); padding: 16px 18px; border-radius: 5px; overflow: auto; margin: 1.5em 0; }
+.after { margin-top: 58px; }
+.back { display: inline-block; font-size: 1.02em; border-bottom: 1px solid var(--line); }
+
+/* Before the opening animation starts */
+html.js:not(.sky-ready) [data-in], html.js:not(.sky-ready) #top nav, html.js:not(.sky-ready) #brand { opacity: 0; }
+
+/* No JavaScript, no WebGL, or reduced data: a still sunset instead of the shader */
+html:not(.js) .first {
+  background: linear-gradient(to bottom, #0257c5 0%, #0472eb 28%, #5896f8 48%, #f7f7fa 66%, #fde0b2 78%, #ef911d 88%, #803a12 95%, var(--night) 100%);
+}
+html:not(.js)[data-view="home"] #brand { opacity: 1; color: var(--ink); }
+html:not(.js)[data-view="post"] { background: linear-gradient(to bottom, #050c24, #0e2f6b) fixed; }
+
+@media (max-width: 700px) {
+  :root { --first-screen: 70vh; }
+  #top { padding: 20px 24px; font-size: 17px; }
+  #top nav { gap: 16px; }
+  .hw { top: 45.5vh; }
+  .hw h1 { font-size: 44px; }
+  .ground { padding: 0 24px 34px; }
+  .lede { font-size: 18.5px; }
+  .col { padding-top: 14vh; }
+  .title { font-size: 38px; }
+  .col p { font-size: 19px; }
+  .col p.stand { font-size: 20px; }
+  .col h2 { font-size: 24px; }
+  .col h3 { font-size: 20px; }
+  blockquote { font-size: 21px; }
+  pre { font-size: 13px; }
+}

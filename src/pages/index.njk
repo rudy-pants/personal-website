@@ -1,0 +1,30 @@
+---
+layout: base.njk
+view: home
+permalink: /
+---
+<div id="home" class="view">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="first">
+    <div class="hw"><h1 data-in="0"><span data-out>{{ site.greeting }}</span></h1></div>
+  </div>
+  <div class="ground" data-in="2">
+    <section id="about" data-out>
+      <p class="lede">{{ site.about }}</p>
+      <p class="links">
+        {%- for link in site.links %}
+        <a href="{{ link.url }}">{{ link.label }}</a>
+        {%- endfor %}
+      </p>
+    </section>
+    <section id="writing">
+      <h2 class="label" data-out>Writing</h2>
+      <ol class="lst">
+        {%- for post in collections.post | newestFirst %}
+        <li data-row data-out><a href="{{ post.url }}" data-nav data-post>{{ post.data.title }}</a><time datetime="{{ post.date | isoDate }}">{{ post.date | monthYear }}</time></li>
+        {%- endfor %}
+      </ol>
+    </section>
+    <footer data-out>{{ site.footer }}</footer>
+  </div>
+</div>
