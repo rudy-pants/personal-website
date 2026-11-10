@@ -1,29 +1,13 @@
 ---
-title: A small website, kept on purpose
+title: LLMs and the paradigm shift of technology
 date: 2026-11-01
-description: Placeholder essay, written so you can judge how real reading feels while the sky keeps moving behind it.
+description: A response to speculative views on LLM technology, and a grounded perspective on how AI is superceding old, decaying software products.
 ---
 
-Every website begins as a room you could walk across in a few steps. There is a title, a paragraph, and a list of things you meant to write. It loads before you have finished deciding to open it. Then, gradually, it collects furniture.
+Products built around large language models are becoming the new front door to the internet.
 
-I have spent more evenings than I would like to admit moving that furniture around. A new typeface, a better grid, a theme switcher nobody asked for. Each change felt like progress, and most of them made the room a little harder to cross.
+I increasingly rely on ChatGPT and Claude/Firecrawl for finding important documents and high-quality developer blogs online, instead of using Google or DuckDuckGo.
 
-## The cost of one more thing
+Current AI search capabilities are still very much in the early days, considering how current AI search feels like making curl requests against a Google-based index.
 
-What finally changed my mind was reading my own site on a phone, on a train, with one bar of signal. The words took four seconds to arrive. The decoration had arrived first.
-
-> A personal site does not need to scale. It needs to still be there, and still be yours, ten years from now.
-
-So I started taking things out. Not all of them. I kept the one thing that made me smile each time I opened the page, which is why the light up there is still moving.
-
-```
-const page = await render(post)
-// no framework, no client state
-return new Response(page, { headers })
-```
-
-## What I would keep
-
-A serif that feels like a book. A column narrow enough to rest your eyes on. A list of writing that is never more than a scroll away. And one quiet, slightly unnecessary thing, kept entirely on purpose.
-
-The rest can wait outside. If it is important, it will knock.
+I need a better interface to access human-authored documents.
