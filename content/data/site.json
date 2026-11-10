@@ -1,0 +1,15 @@
+{
+  "name": "Rudy",
+  "url": "https://rudybanerjee.com",
+  "greeting": "Hello, I’m Rudy.",
+  "description": "Rudy’s personal website: writing and notes from the web.",
+  "about": "I’m an engineer who likes deep technical problems, art, good blog posts, and the sky. This site is under active development.",
+  "links": [
+    { "label": "RSS", "url": "/feed.xml" }
+  ],
+  "nav": [
+    { "label": "Writing", "url": "/#writing" },
+    { "label": "About", "url": "/#about" }
+  ],
+  "footer": "Rudy · 2026"
+}

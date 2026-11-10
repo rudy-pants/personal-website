@@ -1,0 +1,15 @@
+---
+layout: base.njk
+view: post
+---
+<div id="post-view" class="view">
+  <article class="col">
+    <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }} · {{ content | readingTime }} minute read</time>
+    <h1 class="title" tabindex="-1">{{ title }}</h1>
+    {%- if description %}
+    <p class="stand">{{ description }}</p>
+    {%- endif %}
+    {{ content | safe }}
+    <div class="after"><a class="back" href="/#writing" data-nav>&larr; All writing</a></div>
+  </article>
+</div>
