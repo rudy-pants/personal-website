@@ -6,9 +6,7 @@ description: A response to speculative views on LLM technology, and a grounded p
 
 Products built around large language models are becoming the new front door to the internet.
 
-I increasingly rely on ChatGPT and Claude/Firecrawl for finding important documents and high-quality developer blogs online, instead of using Google or DuckDuckGo.
-
-Instead of using Google or DuckDuckGo, I find documents like developer blogs and medical procedure guidelines through ChatGPT and Claude with Firecrawl.
+Instead of using Google or DuckDuckGo, I increasingly find documents like developer blogs and medical procedure guidelines through ChatGPT.
 
 Current AI search capabilities are still very much in the early days.
 
