@@ -9,5 +9,16 @@
   "routes": [
     { "pattern": "www.rudybanerjee.com", "custom_domain": true },
     { "pattern": "rudybanerjee.com", "custom_domain": true }
-  ]
+  ],
+  "env": {
+    "preview": {
+      "name": "personal-website-preview",
+      "workers_dev": true,
+      "routes": [],
+      "assets": {
+        "directory": "./dist",
+        "not_found_handling": "404-page"
+      }
+    }
+  }
 }

@@ -6,7 +6,37 @@ Rudy's personal site: a static site built with [Eleventy](https://www.11ty.dev/)
 npm install
 npm run dev      # local preview with live reload
 npm run deploy   # build and publish to rudybanerjee.com
+npm run deploy:preview # build and publish to the shared staging Worker
 ```
+
+## Automatic deployments
+
+GitHub Actions builds PRs targeting `main` and deploys same-repository PRs to
+https://personal-website-preview.rudybdev.workers.dev/#writing. This is a shared
+staging site: the latest PR deployment replaces the previous one. Fork PRs only
+build and do not receive deployment credentials. The preview configuration uses
+a separate Worker with no production custom domains.
+
+Every push to `main`, including a merged PR, builds and deploys the production
+Worker serving both https://rudybanerjee.com and https://www.rudybanerjee.com.
+Deployments to each Worker are serialized, and successful runs include the site
+link in the Actions job summary.
+
+Before deployments can run, add these **repository secrets** under GitHub
+Settings → Secrets and variables → Actions:
+
+- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account containing the Workers.
+- `CLOUDFLARE_API_TOKEN`: a Cloudflare API token using the **Edit Cloudflare
+  Workers** template, restricted to that account and the `rudybanerjee.com` zone
+  for production custom domains. Use an API token rather than a local Wrangler
+  OAuth login, which cannot authenticate GitHub Actions.
+
+See [Cloudflare's GitHub Actions setup](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/)
+for token configuration. Missing credentials cause the deployment step to fail
+with a setup message. Once the secrets are saved, rerun the failed Actions run.
+No manual Worker creation is needed: Wrangler creates the preview Worker on its
+first deployment. Keep any Cloudflare dashboard Git integration disabled for
+these Workers so it does not duplicate the Actions deployments.
 
 ## Adding a post
 

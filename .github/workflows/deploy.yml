@@ -1,0 +1,56 @@
+name: Build and deploy
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Serialize deployments to each shared Worker. Let an active deployment finish
+# rather than interrupting an upload; GitHub retains the latest pending run.
+concurrency:
+  group: deploy-${{ github.event_name == 'push' && 'production' || 'preview' }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      # Fork PRs build without receiving deployment credentials. Never use
+      # pull_request_target to execute a PR's code with repository secrets.
+      - name: Deploy to Cloudflare
+        if: >-
+          github.event_name == 'push' ||
+          github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          DEPLOY_TARGET: ${{ github.event_name == 'push' && 'production' || 'preview' }}
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo "::error::Set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets. See README.md."
+            exit 1
+          fi
+
+          if [[ "$DEPLOY_TARGET" == 'production' ]]; then
+            npx --no-install wrangler deploy --env ''
+            echo 'Production: https://rudybanerjee.com' >> "$GITHUB_STEP_SUMMARY"
+          else
+            npx --no-install wrangler deploy --env preview
+            echo 'Preview: https://personal-website-preview.rudybdev.workers.dev/#writing' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Shared staging site: the latest PR deployment replaces the previous one.' >> "$GITHUB_STEP_SUMMARY"
+          fi
