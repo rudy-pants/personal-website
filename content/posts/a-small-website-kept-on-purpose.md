@@ -1,7 +1,7 @@
 ---
 title: LLMs and the paradigm shift of technology
 date: 2026-11-01
-description: A response to speculative views on LLM technology, and a grounded perspective on how AI is superceding older, decaying software products.
+description: Addressing speculative views on the future of LLM technology, and providing a grounded perspective on current AI progress from model capabilities.
 ---
 
 Products built around large language models are becoming the new front door to the internet.
